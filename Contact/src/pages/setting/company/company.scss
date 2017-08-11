@@ -1,0 +1,16 @@
+
+companys ion-list [class^="contact-icon-"], 
+companys ion-list [class*=" contact-icon-"]{
+  color:#3f7ab7!important;
+}
+
+companys .active {
+	background: #e3f5ff!important;
+}
+
+companys .item{
+	padding-left: 0;
+	text-indent: 8px;
+	border-left: 0.55px solid #c8c7cc;
+	border-right: 0.55px solid #c8c7cc;
+}

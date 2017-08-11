@@ -1,0 +1,30 @@
+<ion-header>
+	<ion-navbar color="primary" hideBackButton="true">
+		<ion-buttons start>
+			<ion-icon color="light" name="arrow-back" (click)="gotoContacts()"></ion-icon>
+		</ion-buttons>
+		<ion-title>
+			{{translation.setting}}
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<ion-list>
+		<ion-list-header>
+			<ion-avatar item-start>
+				<img src="{{user?.photo}}">
+			</ion-avatar>
+			<h2>{{user?.UserName}}</h2>
+			<p>{{user?.Email}}</p>
+		</ion-list-header>
+		<ion-item *ngFor="let menu of menuList" (click)="goPage(menu)">
+			<ion-icon [ngClass]="menu.icon" isActive="false" item-left ></ion-icon>
+			{{menu.name}}
+		</ion-item>
+		<ion-item class="nbb">
+			<button ion-button default block color="danger" (click)="goPage()">
+				{{ translation?.loginOut }}
+			</button>
+		</ion-item>
+	</ion-list>
+</ion-content>

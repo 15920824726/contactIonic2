@@ -1,0 +1,166 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
+
+import { ListsOption,requestOptionService } from '../../../core/providers/request-option.service';
+import { storageService } from '../../../core/providers/storage.service';
+import { detail } from '../detail/detail';
+import { contacts } from '../contact/contacts';
+import { partnerService } from './partner.service';
+import { highlightKeyService } from '../share/highlight.key.service';
+
+
+
+@Component({
+	templateUrl:'partners.html'
+})
+export class partners {
+	options: ListsOption;
+	partners: Array<any> = [];
+	noData: boolean = false;
+	translation: any;
+	parentType: boolean;
+	constructor(
+		private navCtrl: NavController,
+		private navParams: NavParams,
+		private tlService: TranslateService,
+		private reqOptService: requestOptionService,
+		private partnerService: partnerService,
+		private highlightKeyService: highlightKeyService,
+    private sgService:storageService){
+
+	}
+
+	public gotoContact(partner){
+		this.reqOptService.setBpId(partner.id);
+		this.navCtrl.push(contacts,{parentName: partner.ownDefine?partner.ownDefine.initName:partner.businessPartnerName1});
+		this.sgService.setItem('public','bpName',partner.ownDefine?partner.ownDefine.initName:partner.businessPartnerName1);
+	}
+	
+	public gotoDetail(partner){
+		this.reqOptService.setDataId(partner.id);
+		this.navCtrl.push(detail,{detailType: 'partner'});
+	}
+
+	//search data
+	public searchPartner(ev:any){	
+		// No Project id
+		if(this.parentType){
+			if(ev.target.value){
+				this.options.FilterRequest.Pattern = ev.target.value;
+			}else{
+				this.options.FilterRequest.Pattern = '';
+			}
+			this.options.FilterRequest.PageNumber = 0;
+	        this.partners = [];
+
+			this.getBpSummaryItems();			
+		}else{
+			// has Project id
+			if(!ev.target.value){			
+				this.getPartnersByProjectId();			
+			}else{
+				this.partners = this.partnerService.searchPartners(ev.target.value);
+			}			
+		}
+	}
+
+	private setRequestOption(): void {
+		this.options = this.reqOptService.getListsOption();
+		this.options.FilterRequest.ExecutionHints = true;
+		this.options.FilterRequest.orderBy        = [{
+        	'Field': 'BusinessPartnerName1',
+        	'Desc': true
+    	}];
+	}
+
+	private getPartnersByProjectId(){
+		let id = this.navParams.get('projectId');
+		this.partnerService
+			.getPartnersByProjectId({Id: id})
+			.then(res => {
+				if(res && res.length>0){
+					this.noData = false;
+					this.partners = res;
+				}else{
+					this.partners = [];
+					this.noData = true;
+				}
+				
+			},err => {
+				this.partners = [];
+				this.noData = true;
+			});
+	}
+
+	private getBpSummaryItems(){
+		this.partnerService
+			.getBpSummaryItems(this.options)
+			.then( res => {
+				let pageNumber = this.options.FilterRequest.PageNumber;
+				if(!res || (res.length==0 && pageNumber == 0)){
+					this.partners = [];
+					this.noData = true;
+				}else{			
+					this.noData = false;
+					let pa = this.options.FilterRequest.Pattern;
+					let data:any;
+					if(pa){
+						data = this.highlightKeyService.dataPattern(pa,res);
+					}else{
+						data = res;
+					}
+					this.partners = this.partners.concat(data);
+					this.options.FilterRequest.PageNumber++;
+				}
+			},err => {
+				let pageNumber = this.options.FilterRequest.PageNumber;
+				if(pageNumber == 0){
+					this.partners = [];
+					this.noData = true;
+				}
+			});		
+	}
+
+	private getPartners():void {		
+		if(this.parentType){
+			this.getBpSummaryItems();			
+		}else{
+			this.getPartnersByProjectId();
+		}
+	}
+
+	private setParentType(){
+		let parentType:string = this.navParams.get('parentName');
+		if(parentType){
+			this.parentType = false;
+		}else{
+			this.parentType = true;
+		}
+	}
+
+	//when scroll get more contacts data 
+	public getMoreContacts(ev:any):void{
+		setTimeout(() => {
+			this.getBpSummaryItems();
+			ev.complete();
+		},3000);		
+	}
+
+	private langScope(data){
+		this.translation = {
+			search: data.common.search,
+			cancel: data.common.cancel,
+		}
+	}
+
+	ngOnInit(){		
+		let translation = this.tlService.getTranslation(this.tlService.currentLang);
+		translation.subscribe(data => {
+			this.langScope(data);
+		});
+		this.setParentType();
+		this.setRequestOption();
+		this.getPartners();		
+	}
+}

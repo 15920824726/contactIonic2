@@ -1,0 +1,75 @@
+<ion-header>
+	<ion-navbar color="primary" hideBackButton="false">
+		<contact-header></contact-header>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<ion-list>
+	    <ion-list-header *ngIf="contactDetail">
+	      <ion-avatar item-start *ngIf="data?.photo?.photo" (click)="openPopover($event)">
+	        <img-data [dataUrl]="data?.photo?.photo"></img-data>
+	      </ion-avatar>
+	      <h2>{{contactName}}</h2>
+	      <p>{{data?.basicInfo?.contactRoleDescription}}</p>
+	      <p>{{data?.pbName}}</p>
+	      <p>{{data?.basicInfo?.subsidiaryDescription}}</p>
+	    </ion-list-header>
+		<ion-item>
+			<ion-label stacked>
+				{{translation?.firstName}}
+			</ion-label>
+			<ion-input type="text" placeholder="{{translation?.firstName}}" [(ngModel)]="data.basicInfo.firstName" maxlength="15"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label stacked>
+				{{translation?.familyName}}
+			</ion-label>
+			<ion-input type="text" placeholder="{{translation?.familyName}}" [(ngModel)]="data.basicInfo.familyName" maxlength="15"></ion-input>
+		</ion-item>
+		<ion-item (click)="selectTel(0)">
+			<ion-label stacked>
+				<ion-icon class="contact-icon-telephone"></ion-icon>
+				{{translation?.tel}}
+			</ion-label>
+			<ion-label class="add-label-style-active" *ngIf="!data?.telephone?.telephone">{{translation?.tel}}</ion-label>
+      <ion-label class="add-label-style" *ngIf="data?.telephone?.telephone">{{data?.telephone?.telephone}}</ion-label>
+		</ion-item>
+
+		<ion-item (click)="selectTel(1)">
+			<ion-label stacked>
+				<ion-icon class="contact-icon-telephone" isActive="false"></ion-icon>
+				{{translation?.otherTel}}
+			</ion-label>
+      <ion-label class="add-label-style-active" *ngIf="!data?.telephone2?.telephone">{{translation?.otherTel}}</ion-label>
+      <ion-label class="add-label-style" *ngIf="data?.telephone2?.telephone">{{data?.telephone2?.telephone}}</ion-label>
+    </ion-item>
+
+		<ion-item>
+			<ion-label stacked>
+				<ion-icon class="contact-icon-mobile" isActive="false"></ion-icon>
+				{{translation?.mobile}}
+			</ion-label>
+			<ion-input type="text" placeholder="{{translation?.mobile}}" [(ngModel)]="data.mobile.phoneNumber" maxlength="11"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label stacked>
+				<ion-icon class="contact-icon-fax" isActive="false"></ion-icon>
+				{{translation?.fax}}
+			</ion-label>
+			<ion-input type="text" placeholder="{{translation?.fax}}" [(ngModel)]="data.teleFax.phoneNumber" maxlength="30"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label stacked>
+				<ion-icon class="contact-icon-email" isActive="false"></ion-icon>
+				{{translation?.email}}
+			</ion-label>
+			<ion-input type="email" placeholder="{{translation?.email}}" [(ngModel)]="data.basicInfo.email" maxlength="30"></ion-input>
+		</ion-item>
+	    <ion-item class="nbb">
+	      <button ion-button block default color="primary" (click)="addContact()">{{addType==0?translation.add:translation?.update}}</button>
+	    </ion-item>
+	</ion-list>
+</ion-content>
+<ion-footer>
+	<itwo-footer curMenuIndex="2"></itwo-footer>
+</ion-footer>

@@ -1,0 +1,125 @@
+{
+  "common": {
+    "app": "App",
+    "appName": "Contact",
+    "select": "Select",
+    "company": "Company",
+    "project": "Project",
+    "contacts": "Contacts",
+    "businessPartner":"Business partner",
+    "favorite": "Favorite",
+    "role": "Role",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "search": "Search",
+    "delete": "Delete",
+    "success": "Changes saved",
+    "ok": "OK",
+    "takePhoto": "Take photo",
+    "choosePhoto": "Choose from gallery",
+    "noData": "No data.",
+    "setting": "Setting",
+    "noMapData": "Google Map is error."
+  },
+  "server": {
+      "server": "Server",
+      "authenticationServer": "Authentication server",
+      "appServer": "Cloud server",
+      "apply": "Apply",
+      "serverConfig": "Server configuration"
+    },
+  "login": {
+    "login": "Login",
+    "loginName": "Username",
+    "loginAddress": "!!!!Login Address",
+    "loginPassword": "Password",
+    "oldPassword": "!!!!Old Password",
+    "newPassword": "!!!!New Password",
+    "conPassword": "!!!!Confirm Password",
+    "loginOut": "Sign Out",
+    "remember": "Remember",
+    "busyMsg": "Signing in... Please wait.",
+    "failedMsg": "Sign in failed! Please try again.",
+    "successMsg": "Signed in successfully! Loading, please wait.",
+    "isEmpty":"!!!!is empty!"
+  },
+  "language": {
+    "language": "Language",
+    "en":"English",
+    "de":"Deutsch",
+    "zh":"Chinese"
+  },
+  "about": {
+    "about": "About",
+    "appName": "App Name",
+    "version": "Version"
+  },
+  "form": {
+    "addContactTitle": "!!!!Add Local Contacts",
+    "addTo": "!!!!Add to",
+    "mobile":"Mobile",
+    "fax": "Fax",
+    "email": "Email",
+    "telephone":"Telephone",
+    "mobilePhone":"Mobile phone",
+    "otherTelephone":"Other telephone",
+    "inputTelephone":"Input telephone",
+    "address":"Address",
+    "website":"Website",
+    "itemLimitationTitle":"!!!!!!!Item quantity limitation",
+    "itemLimitationTemplate":"!!!!Could choose at most 10 items!",
+    "message": "Message",
+    "firstName":"First name",
+    "familyName":"Family name",
+    "add":"Add",
+    "save": "Save",
+    "saveSuccess":"Saved successfully",
+    "savefailure":"Error, not saved. Please try again.",
+    "update":"Update",
+    "success":"Changes saved",
+    "failure":"Error",
+    "country":"Country",
+    "areaCode":"Area code",
+    "phoneNumber":"Phone number",
+    "extension":"Extension",
+    "customer":"Customer",
+    "customerContact":"Customer contact",
+    "contactRole":"Contact role",
+    "projectName":"Project name",
+    "emailClient": "Email client is not available.",
+    "takePhoto":"Take photo",
+    "photoAlbum":"From gallery",
+    "setting": "Settings",
+    "addOneMoreTel":"Please add at least one telephone number.",
+    "addressList":"Device contacts",
+    "addError":"Error, unable to add contact. Please try again.",
+    "addSuccess":"Contact has been added",
+    "getContactsFailure":"Unable to load device contacts. Please try again."
+  },
+  "header":{
+    "newContact":"New contact ",
+    "deviceContact":"From device contacts"
+  },
+  "favorite":{
+      "addSuccess": "Added to favorites!",
+      "addFail": "Error, cannot add to favorites. Please try again.",
+      "delSuccess": "Removed from favorites!",
+      "delFail": "Error, unable to remove from favorites. Please try again."
+  },
+  "map":{
+    "failure": "Geocode was not successful for the following reason"
+  },
+  "http":{
+    "tokenMissing":"Token Missing.",
+    "serverConnectFail": "Server connect fail."
+  },
+  "message":{
+    "message":"Message",
+    "send": "Send",
+    "success": "Message sent!",
+    "fail": "Failed to send message, please try again."
+  },
+  "company":{
+    "goBack":"Please go back!"
+  }
+}

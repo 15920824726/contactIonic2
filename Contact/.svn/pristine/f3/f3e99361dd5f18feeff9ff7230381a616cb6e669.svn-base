@@ -1,0 +1,58 @@
+<ion-header>
+	<ion-navbar color="primary" hideBackButton="true">
+    <ion-icon color="light" name="arrow-back" (click)="gotoProject()" class="pa ml5"></ion-icon>
+		<contact-header></contact-header>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+  <no-data *ngIf="noData"></no-data>
+	<ion-list *ngIf="!noData">
+		<ion-item *ngIf="data?.telephone">
+			<ion-icon class="contact-icon-telephone" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.telephone}}</h2>
+			<p class="text-blue">{{data?.telephone}}</p>
+		</ion-item>		
+
+		<ion-item *ngIf="data?.mobile">
+			<ion-icon class="contact-icon-mobile" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.mobile}}</h2>
+			<a href="tel:{{data?.mobile}}" class="text-blue">{{data?.mobile}}</a>
+		</ion-item>
+
+		<ion-item *ngIf="data?.teleFax">
+			<ion-icon class="contact-icon-fax" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.fax}}</h2>
+			<p class="text-blue">{{data?.teleFax}}</p>
+		</ion-item>
+
+		<ion-item *ngIf="data?.email&&data?.email.length>1">
+			<ion-icon class="contact-icon-email" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.email}}</h2>
+			<a href="mailto:{{data?.email}}" class="text-blue">{{data?.email}}</a>
+		</ion-item>
+
+		<ion-item *ngIf="data?.addressLine" (click)="gotoMap()">
+			<ion-icon class="contact-icon-map" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.address}}</h2>
+			<p class="text-blue">{{data?.addressLine}}</p>
+		</ion-item>	
+		<ion-item *ngIf="data?.bpName1">
+			<ion-icon class="contact-icon-bp" item-start isActive="false"></ion-icon>
+		 	<h2>{{translation?.customer}}</h2>
+			<p class="text-blue">{{data?.bpName1}}</p>
+        </ion-item>	
+        <ion-item *ngIf="data?.contactRoleDescription">
+        	<ion-icon class="contact-icon-contact" item-start isActive="false"></ion-icon>
+		 	<h2>{{translation?.contactRole}}</h2>
+			<p class="text-blue">{{data?.contactRoleDescription}}</p>
+        </ion-item>	
+		<ion-item *ngIf="data?.firstName" (click)="gotoContact()">
+			<ion-icon class="contact-icon-contact" item-start isActive="false"></ion-icon>
+		 	<h2>{{translation?.customerContact}}</h2>
+			<p class="text-blue">{{data?.firstName}}{{data?.familyName}}</p>
+        </ion-item>
+	</ion-list>
+</ion-content>
+<ion-footer>
+	<itwo-footer></itwo-footer>
+</ion-footer>

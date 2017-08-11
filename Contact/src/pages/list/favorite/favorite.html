@@ -1,0 +1,23 @@
+<ion-header>
+	<ion-navbar color="primary" hideBackButton="true">
+		<contact-header></contact-header>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<no-data *ngIf="noData"></no-data>
+	<ion-list *ngIf="!noData">
+		<ion-item *ngFor="let favorite of favorites" (click)="gotoDetail(favorite)">
+			<ion-avatar item-start>
+				<img src="{{favorite.photo.photo}}">
+			</ion-avatar>
+			<h2>{{favorite?.basicInfo?.firstName}} {{favorite?.basicInfo?.familyName}}</h2>
+			<p>{{favorite?.basicInfo?.subsidiaryDescription}}</p>			
+			<button ion-button clear item-end (click)="del(favorite['$loki'])">
+				<ion-icon class="contact-icon-delete" isActive="false"></ion-icon>
+			</button>
+		</ion-item>
+	</ion-list>
+</ion-content>
+<ion-footer>
+	<itwo-footer curMenuIndex=0></itwo-footer>
+</ion-footer>

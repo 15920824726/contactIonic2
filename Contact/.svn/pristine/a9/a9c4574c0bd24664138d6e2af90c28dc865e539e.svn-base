@@ -1,0 +1,22 @@
+<ion-header>
+	<ion-navbar color="primary" hideBackButton="true">
+    <ion-icon color="light" name="arrow-back" (click)="gotoLogin()" start class="ml10" tappable></ion-icon>
+		<ion-title>
+			<i class="contact-icon-selectcompany"></i>
+			{{title}}
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<no-data *ngIf="noData"></no-data>
+	<ion-list *ngIf="!noData" padding>
+		<ion-item *ngFor="let company of companies" (click)="selectCompamy(company)" [ngClass]="selectedCompanyId == company.id?'active':''">
+						
+			<span>
+				<ion-icon [ngClass]="classByType(company)" isActive="false"></ion-icon>
+				{{ company.code }} {{ company.name }}
+			</span>
+			<ion-icon *ngIf="!!company.children" name="arrow-forward" isActive="false" item-right></ion-icon>
+		</ion-item>
+	</ion-list>
+</ion-content>

@@ -1,0 +1,10 @@
+  <ion-grid no-padding>
+    <ion-row text-center class="pt10 pb10">
+      <ion-col *ngFor="let menu of menuLists index as i" icon-only (click)="gotoPage(menu.page)"> 
+      	<div class="{{i==curMenuIndex?'active':''}}">   
+  			  <ion-icon class="{{menu.icon}}" isActive="false"></ion-icon>
+  			  <div class="text">{{menu.name}}</div>
+  		</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>

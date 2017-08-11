@@ -1,0 +1,127 @@
+{
+    "common": {
+        "app": "!App",
+        "appName": "!Contact",
+        "select": "!Select",
+        "company": "!Company",
+        "project": "!projekt",
+        "contacts": "!kontakte",
+        "businessPartner":"!business partner",
+        "favorite": "!favorit",
+        "role": "!Role",
+        "edit": "!Edit",
+        "cancel": "!Cancel",
+        "search": "!Search",
+        "delete": "!Delete",
+        "success": "!Success",
+        "ok": "!OK",
+        "takePhoto": "!Take Photo",
+        "choosePhoto": "!Choose from Library",
+        "noData": "!Keine Daten.",
+        "setting": "!Setting",
+        "noMapData": "!Google Map is error."
+    },
+    "server":{
+        "server":"!Server",
+        "authenticationServer": "!Authentication Server",
+        "appServer": "!Cloud Server",
+        "apply": "!Apply",
+        "serverConfig": "!Server Config"
+    },
+    "login": {
+        "login": "!Login",
+        "loginName": "!Benutzer Name",
+        "loginAddress": "!Login-Adresse",
+        "loginPassword": "!Passwort",
+        "oldPassword": "!Altes Kennwort",
+        "newPassword": "!Neues Kennwort",
+        "conPassword": "!Bestätige das Kennwort",
+        "loginOut": "!Einloggen Out",
+        "remember": "!Remember",
+        "busyMsg": "!Einloggen in Bearbeitung ... Bitte warten!",
+        "failedMsg": "!Anmeldung fehlerhaft! Benutzername oder Kennwort falsch! Bitte versuchen sie es nochmals!",
+        "successMsg": "!Anmeldung erfolgreich! Laden der Anwendung wird fortgesetzt. Bitte warten ...",
+        "isEmpty":"!is empty!"
+    },
+    "language": {
+        "language": "!Language",
+        "en":"!English",
+        "de":"!German",
+        "zh":"!Chinese"
+    },
+    "about": {
+        "about": "!About",
+        "appName": "!App Name",
+        "version": "!Version"
+    },
+    "form": {
+        "addContactTitle": "!Add Local Contacts",
+        "addTo": "!Add to",
+        "mobile":"!Mobile",
+        "fax": "!Fax",
+        "email": "!Email",
+        "telephone":"!Telefon",
+        "mobilePhone":"!Mobile Phone",
+        "otherTelephone":"!OtherTelefon",
+        "inputTelephone":"!Input Telephone",
+        "address":"!Address",
+        "website":"!Website",
+        "itemLimitationTitle":"!Item quantity limitation",
+        "itemLimitationTemplate":"!Could choose at most 10 items!",
+        "message": "!Message",
+        "firstName":"!First Name",
+        "familyName":"!Family Name",
+        "add":"!add",
+        "save": "Save",
+        "update":"!Update",
+        "success":"Success",
+        "saveSuccess":"!Saved Successfully",
+        "savefailure":"!Saved failure",
+        "failure":"!failure",
+        "country":"!Country",
+        "areaCode":"!Area Code",
+        "phoneNumber":"!PhoneNumber",
+        "extension":"!Extension",
+        "customer":"!Customer",
+        "customerContact":"!Customer Contact",
+        "contactRole":"!Contact Role",
+        "projectName":"!Project Name",
+        "emailClient": "!Email client is not available.",
+        "takePhoto":"!Take Photo",
+        "photoAlbum":"!Photo Album",
+        "setting": "!Setting",
+        "addOneMoreTel":"!Please add one more Telephone number.",
+        "addressList":"!Address List",
+        "addError":"!Add Failure",
+        "addSuccess":"!Add Success",
+        "getContactsFailure":"!Get Contacts Failure"
+    },
+    "header":{
+        "newContact":"!New Contact ",
+        "deviceContact":"!From Device Contacts"
+    },
+    "favorite":{
+        "addSuccess": "!Added to favorites Successfully!",
+        "addFail":"!Added to favorites failure!",
+        "updateSuccess": "!Updated to favorites Successfully!",
+        "updateFail": "!Updated to favorites failure!",
+        "delSuccess": "!Removed from favorites Successfully!",
+        "delFail": "!Removed from favorites failure!"
+    },
+    "map":{
+        "failure": "!Geocode was not successful for the following reason"
+    },
+    "http":{
+        "tokenMissing":"!Token Missing.",
+        "serverConnectFail": "!Server connect fail."
+    },
+    "message":{
+        "message":"!Message",
+        "send": "!Send",
+        "success": "!Message send success!",
+        "fail": "!Message send fail!"
+      },
+  "company":{
+    "goBack":"!Please go back!"
+  }
+}

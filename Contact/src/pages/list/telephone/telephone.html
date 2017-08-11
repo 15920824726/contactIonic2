@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar color="primary" hideBackButton="false">
+    <contact-header></contact-header>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+	<ion-list padding>
+		<ion-item (click)="selectCountry($event)">
+			<ion-label>{{translation?.country}}</ion-label>
+		    <ion-note item-right>{{entity.countryName}}</ion-note>
+		    <ion-icon name="arrow-down" item-right tappable></ion-icon>
+      </ion-item>
+		<ion-item>
+			<ion-label fixed>{{translation?.areaCode}}</ion-label>
+			<ion-input [(ngModel)]="entity.areaCode" readonly="true">
+			</ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label fixed>{{translation?.phoneNumber}}</ion-label>
+			<ion-input type="number" [(ngModel)]="entity.phoneNumber" (input)="formatTelephone()" maxlength="20">
+			</ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label fixed>{{translation?.extention}}</ion-label>
+			<ion-input type="number" [(ngModel)]="entity.extention" (input)="formatTelephone()" maxlength="20">
+			</ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label fixed>{{translation?.telephone}}</ion-label>
+			<ion-input [(ngModel)]="entity.telephone" readonly="true">
+			</ion-input>
+		</ion-item>
+		<ion-item>
+			<button ion-button block default color="primary" (click)="addTelephone()">{{translation?.add}}</button>
+		</ion-item>
+	</ion-list>
+</ion-content>

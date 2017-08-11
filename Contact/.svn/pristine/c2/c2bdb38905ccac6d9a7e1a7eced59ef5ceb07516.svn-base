@@ -1,0 +1,121 @@
+import { Component, Input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
+
+import { PopoverComponent } from '../../../core/components/popover.component';
+import { addService } from '../add/add.service';
+import { add } from '../add/add';
+import { Entity } from '../../../core/type/datatype';
+
+
+@Component({
+	templateUrl: 'telephone.html'
+})
+export class telephone {
+	private translation: any;
+	private telType: number;
+	private contactDeatail:any;
+	private initialDetail:any;
+	@Input() entity:Entity;
+	constructor(
+		private navCtrl: NavController,
+		private navParams: NavParams,
+		private tlService: TranslateService,
+		private popoverCtrl: PopoverController,
+		private addService: addService){
+	}
+
+	private langScope(form): void{
+		this.translation = {
+			title: form.inputTelephone,
+			country: form.country,
+			areaCode: form.areaCode,
+			phoneNumber: form.phoneNumber,
+			extention: form.extension,
+			telephone: form.telephone,
+			add: form.add
+		}
+	}
+
+	private openPopover(res): void{
+		let popover = this.popoverCtrl.create(PopoverComponent,res);
+		popover.present({});
+
+		popover.onWillDismiss(country => {
+			if(country){
+				this.setEntity(country);
+			}
+		});
+	}
+
+	private setEntity(country): void{
+		this.entity.areaCode = country.areaCode;
+		this.entity.countryFk = country.id;
+		this.entity.countryName = country.name;
+
+		if(country.areaCode){
+			let len = country.areaCode.length;
+			this.entity.areaCode = country.areaCode.substring(1,len);
+		}
+		this.formatTelephone();
+	}
+
+	private formatTelephone(): void{
+    if(!this.entity.areaCode){
+      this.entity.areaCode = '';
+    }
+    if(!this.entity.phoneNumber){
+      this.entity.phoneNumber = '';
+    }
+    if(!this.entity.extention){
+      this.entity.extention = '';
+    }
+    this.entity.telephone = '+'+this.entity.areaCode+' '+this.entity.phoneNumber+'-'+this.entity.extention;
+  }
+
+	public selectCountry(ev:any): void{
+		this.addService
+			.getCountries({SearchText: ''})
+			.then(res => {
+				res.map(item => {
+					item.name = item.description;
+					return item;
+				});
+				this.openPopover(res);
+			},err => {
+				console.error(err);
+			})
+
+	}
+
+	public addTelephone(): void{
+	  this.entity.pattern = '+'+this.entity.areaCode+' '+this.entity.phoneNumber+'-'+this.entity.extention;
+	  this.telType === 0 ? this.contactDeatail.telephone=this.entity : this.contactDeatail.telephone2=this.entity;
+	  this.addService.saveContact(this.contactDeatail);
+		this.navCtrl.push(add,{telType:this.telType});
+	}
+
+	public gotoAddDetail(): void{
+    this.addService.saveContact(this.initialDetail);
+    this.navCtrl.push(add);
+  }
+
+	private init(): void{
+    this.contactDeatail = this.addService.getContact();
+    this.initialDetail = JSON.parse(JSON.stringify(this.contactDeatail));
+    this.telType = this.navParams.get('telType');
+    if(this.contactDeatail){
+      this.entity = this.telType === 0 ? this.contactDeatail.telephone : this.contactDeatail.telephone2;
+    }
+  }
+
+	ngOnInit(){
+		let translation = this.tlService.getTranslation(this.tlService.currentLang);
+
+		translation.subscribe(data => {
+			this.langScope(data.form);
+		});
+
+		this.init();
+	}
+}

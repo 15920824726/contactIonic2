@@ -1,0 +1,128 @@
+{
+  "common": {
+    "app": "!App",
+    "appName": "!Contact",
+    "select": "!Select",
+    "company": "!Company",
+    "project": "!projekt",
+    "contacts": "!kontakte",
+    "businessPartner":"!business partner",
+    "favorite": "!favorit",
+    "role": "!Role",
+    "edit": "!Edit",
+    "cancel": "!Cancel",
+    "search": "!Search",
+    "delete": "!Delete",
+    "success": "!Success",
+    "ok": "!OK",
+    "takePhoto": "!Take Photo",
+    "choosePhoto": "!Choose from Library",
+    "noData": "!Keine Daten.",
+    "setting": "!Setting",
+    "noMapData": "!Google Map is error."
+  },
+  "server":{
+    "server":"!Server",
+    "authenticationServer": "!Authentication Server",
+    "appServer": "!Cloud Server",
+    "apply": "!Apply",
+    "serverConfig": "!Server Config"
+  },
+  "login": {
+    "login": "登录",
+    "loginName": "用户名",
+    "loginAddress": "Login Address",
+    "loginPassword": "密码",
+    "oldPassword": "旧密码",
+    "newPassword": "新密码",
+    "conPassword": "Confirm Password",
+    "loginOut": "退出",
+    "remember": "记住",
+    "busyMsg": "正在登录... 请稍候!",
+    "failedMsg": "登录失败! 请重试...",
+    "successMsg": "登录成功! 正在继续装载,请稍候 ...",
+    "isEmpty":"!is empty!"
+  },
+  "language": {
+    "language": "!Language",
+    "en":"!English",
+    "de":"!German",
+    "zh":"!Chinese"
+  },
+  "about": {
+    "about": "关于",
+    "appName": "软件名字",
+    "contact": "联系方式",
+    "version": "版本"
+  },
+  "form": {
+    "addContactTitle": "添加本地通讯录",
+    "addTo": "添加到",
+    "mobile":"移动号码",
+    "fax": "电子传真",
+    "email": "电子邮件",
+    "telephone":"电话号码",
+    "mobilePhone":"移动号码",
+    "otherTelephone":"其他电话号码",
+    "inputTelephone":"填写电话",
+    "address":"地址",
+    "website":"网站",
+    "itemLimitationTitle":"条目限制",
+    "itemLimitationTemplate":"最多只能选择10条记录",
+    "message": "信息",
+    "firstName":"名",
+    "familyName":"姓",
+    "add":"添加",
+    "save": "保存",
+    "update":"更新",
+    "success":"成功",
+    "saveSuccess":"保存成功",
+    "savefailure":"保存失败",
+    "failure":"失败",
+    "country":"国家",
+    "areaCode":"区号",
+    "phoneNumber":"电话号码",
+    "extension":"分机号",
+    "customer":"合作伙伴",
+    "customerContact":"联系人",
+    "contactRole":"联系人角色",
+    "projectName":"项目名",
+    "emailClient": "!Email client is not available.",
+    "takePhoto":"!Take Photo",
+    "photoAlbum":"!Photo Album",
+    "setting": "!Setting",
+    "addOneMoreTel":"!Please add one more Telephone number.",
+    "addressList":"!Address List",
+    "addError":"!Add Failure",
+    "addSuccess":"!Add Success",
+    "getContactsFailure":"!Get Contacts Failure"
+  },
+  "header":{
+    "newContact":"!New Contact ",
+    "deviceContact":"!From Device Contacts"
+  },
+  "favorite":{
+    "addSuccess": "!Added to favorites Successfully!",
+    "addFail":"!Added to favorites failure!",
+    "updateSuccess": "!Updated to favorites Successfully!",
+    "updateFail": "!Updated to favorites failure!",
+    "delSuccess": "!Removed from favorites Successfully!",
+    "delFail": "!Removed from favorites failure!"
+  },
+  "map":{
+    "failure": "!Geocode was not successful for the following reason"
+  },
+  "http":{
+    "tokenMissing":"!Token Missing.",
+    "serverConnectFail": "!Server connect fail."
+  },
+  "message":{
+    "message":"!Message",
+    "send": "!Send",
+    "success": "!Message send success!",
+    "fail": "!Message send fail!"
+  },
+  "company":{
+    "goBack":"!Please go back!"
+  }
+}

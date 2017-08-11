@@ -1,0 +1,22 @@
+<ion-header>
+	<ion-navbar color="primary" hideBackButton="true">
+		<contact-header></contact-header>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<ion-searchbar tappable (ionInput)="searchPartner($event)" debounce="1000" placeholder="{{translation?.search}}" autocomplete="true" cancelButtonText="{{translation?.cancel}}" showCancelButton="true"></ion-searchbar>
+	<no-data *ngIf="noData"></no-data>
+	<ion-list *ngIf="!noData">
+		<ion-item *ngFor="let project of projects">
+			<h2 [innerHTML]="project?.projectName" (click)="gotoPartney(project)"></h2>
+			<p *ngIf="!project?.ownDefine?.state" [innerHTML]="project?.projectNo" (click)="gotoPartney(project)"></p>
+			<p *ngIf="project?.ownDefine?.state" [innerHTML]="project?.ownDefine?.value" (click)="gotoPartney(project)"></p>
+			<button ion-button clear item-end (click)="gotoDetail(project)">
+				<ion-icon name="information-circle" isActive="false"></ion-icon>
+			</button>
+		</ion-item>
+	</ion-list>
+</ion-content>
+<ion-footer>
+	<itwo-footer curMenuIndex=3></itwo-footer>
+</ion-footer>

@@ -1,0 +1,238 @@
+import { Component ,Input} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { NavController,NavParams,Platform,PopoverController } from 'ionic-angular';
+
+import { ContactDetail } from '../../../core/type/datatype';
+import { dbService } from '../../../core/providers/database.service';
+import { deviceService } from '../../../core/providers/device.service';
+import { toastService } from '../../../core/providers/toast.service';
+import { PopoverComponent } from '../../../core/components/popover.component';
+import { requestOptionService } from '../../../core/providers/request-option.service';
+
+import { telephone } from '../telephone/telephone';
+import { detail } from '../detail/detail';
+import { contacts } from "../contact/contacts"
+import { addService } from './add.service';
+
+@Component({
+	templateUrl:'add.html'
+})
+export class add {
+	private options:any;
+	public option:any;
+	private translation: any = {};
+	private data: any;
+	private popList:any;
+	private contactName:string;
+	private dataModel:any = {
+    basicInfo: {},
+    teleFax: {},
+    telephone: {},
+    telephone2: {},
+    photo: '',
+    pbName: '',
+    mobile:{}
+  };
+	@Input() contactDetail: ContactDetail;
+	constructor(
+		private tlService: TranslateService,
+		private navCtrl: NavController,
+		private navParams: NavParams,
+    private addService:addService,
+    private dvService: deviceService,
+    private tsService: toastService,
+    private reqOptService:requestOptionService,
+    private popoverCtrl:PopoverController,
+    private platform: Platform,
+    private dbService: dbService){
+
+	}
+
+	private langScope(data): void{
+		this.translation = {
+			firstName: data.form.firstName,
+			familyName: data.form.familyName,
+			tel: data.form.telephone,
+			otherTel: data.form.otherTelephone,
+			mobile: data.form.mobilePhone,
+			fax: data.form.fax,
+			email: data.form.email,
+      		add:data.form.add,
+      		addOneMoreTel:data.form.addOneMoreTel,
+      		update:data.form.update,
+      		addError:data.form.addError,
+      		addSuccess:data.form.addSuccess,
+      		saveSuccess:data.form.saveSuccess,
+      		savefailure:data.form.savefailure
+		};
+
+    this.popList = [
+      {
+        name: data.form.takePhoto,
+        checked: false
+      },
+      {
+        name: data.form.photoAlbum,
+        checked: false
+      }
+    ];
+	}
+
+	public selectTel(type): void{
+		this.addService.saveContact(this.data);
+		this.navCtrl.push(telephone,{telType:type});
+	}
+
+  private getTelephoneOptions(): any{
+    let data=this.data;
+    let options:any = {};
+    options.count =0;
+    if(data.telephone.telephone||data.telephone.id){
+      options.count++;
+      options.telephone1=true;
+    }
+    if(data.mobile.phoneNumber||data.mobile.id){
+      options.count++;
+      options.mobile=true;
+    }
+    if(data.telephone2.telephone||data.telephone2.id){
+      options.count++;
+      options.telephone2=true;
+    }
+    if(data.teleFax.phoneNumber||data.teleFax.id) {
+      options.count++;
+      options.fax = true;
+    }
+    if(data.photo){
+      options.count++;
+      options.photo = true;
+    }
+    return options;
+  }
+
+  public addContact(): void{
+    let option = this.reqOptService.getBPOption().BpId ?this.reqOptService.getBPOption():{"BpId":this.contactDetail.basicInfo.businessPartnerFk};
+    let requestOption :any;
+    let temOption =[];
+    let telephoneOptions = this.getTelephoneOptions();
+    this.addService.createContact(option,false).then(response =>{
+      this.addService.createBase({"OwnerId":this.data.basicInfo.id||response.id},telephoneOptions).then(base => {
+        requestOption = this.addService.setRequestOption(response,base,this.data);
+        temOption.push(requestOption.Contact);
+        this.options = {
+          "Contacts" : temOption
+        } ;
+        this.addService.saveContactsToServe(this.options,false).then(
+          res => {
+            if(this.navParams.get('addType')!=0){
+              this.upFavourite();
+              this.tsService.success(this.translation.saveSuccess);
+            }else{
+              this.tsService.success(this.translation.addSuccess);
+            }
+            this.reqOptService.setDataId(this.options.Contacts[0].MainItemId);
+            this.navCtrl.push(detail,{detailType:"partnerContact"});
+          },error =>{
+            this.tsService.error(this.translation.savefailure);
+          })
+      },error => {
+        this.tsService.error(this.translation.savefailure);
+      })
+    }, error => {
+      this.tsService.error(this.translation.savefailure);
+    });
+  }
+
+  public upFavourite(): void{
+    this.dbService
+      .getDataByKey('favorite','id',this.data.basicInfo.id)
+      .then(res => {
+        if(res&&res.length>0){
+          let favoriteId = res[0]['$loki'];
+          this.dbService
+            .updateData('favorite',favoriteId,this.data)
+            .then(res => {
+              this.tsService.success(this.translation.updateSuccess);
+            },err => {
+              this.tsService.success(this.translation.updateFail);
+            });
+        }
+      });
+  }
+
+  public gotoContactDetail(): void{
+    if(this.data.basicInfo.id){
+      this.reqOptService.setBpId(this.data.basicInfo.businessPartnerFk);
+      this.reqOptService.setDataId(this.data.basicInfo.id);
+      this.navCtrl.push(detail);
+    }else{
+      this.reqOptService.setBpId(this.data.basicInfo.businessPartnerFk);
+      this.navCtrl.push(contacts);
+    }
+  }
+
+  public openPopover(event:any):void{
+    let popover = this.popoverCtrl.create(PopoverComponent,this.popList);
+    popover.present({
+      ev:event
+    });
+
+    popover.onWillDismiss(data => {
+      if(this.platform.is('cordova')){
+        let index = this.popList.indexOf(data);
+        if (index !== -1) {
+          let options = {
+            act: index,
+            width: 800,
+          };
+          this.dvService.takePhoto(options)
+            .then(result => {
+              let base64Image = 'data:image/jpeg;base64,' + result;
+              this.data.photo = {
+                "id":this.data.photo.id,
+                "photo":base64Image,
+                "ownerId":this.data.photo.ownerId,
+                "version":this.data.photo.version
+              };
+            }, error => {
+              this.tsService.error(error);
+            });
+        }
+      }
+    });
+  }
+
+  private init(): void{
+    let addType = this.navParams.get('addType');
+    if(addType ===0){
+      this.data = this.dataModel;
+    }else {
+      let contactDetailEdit = this.navParams.get('contactDetail')||this.addService.getContact();
+      this.contactDetail = {
+        basicInfo: contactDetailEdit.basicInfo?contactDetailEdit.basicInfo:{},
+        teleFax: contactDetailEdit.teleFax?contactDetailEdit.teleFax:{},
+        telephone: contactDetailEdit.telephone?contactDetailEdit.telephone:{},
+        telephone2: contactDetailEdit.telephone2?contactDetailEdit.telephone2:{},
+        photo: contactDetailEdit.photo?contactDetailEdit.photo:{},
+        pbName: contactDetailEdit.pbName?contactDetailEdit.pbName:'',
+        mobile:contactDetailEdit.mobile?contactDetailEdit.mobile:{}
+      };
+      if(this.contactDetail){
+        this.data = this.contactDetail;
+        this.contactName = `${this.data.basicInfo.firstName} ${this.data.basicInfo.familyName}`;
+        if(this.contactName.length>20){
+          this.contactName = `${this.contactName.substring(0,20)} ···`;
+        }
+      }
+    }
+  }
+
+	ngOnInit(){
+		let transltation = this.tlService.getTranslation(this.tlService.currentLang);
+		transltation.subscribe(data => {
+			this.langScope(data);
+		});
+
+		this.init();
+	}
+}

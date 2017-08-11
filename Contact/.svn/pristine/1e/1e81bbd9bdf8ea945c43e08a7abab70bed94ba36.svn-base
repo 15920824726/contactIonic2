@@ -1,0 +1,29 @@
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
+@Component({
+	selector: 'no-data',
+	template: `
+		<div class="no-data">{{translation?.noData}}</div>
+	`
+})
+
+export class NodataComponent {
+	private translation: any;
+	constructor(private tlService: TranslateService){
+
+	}
+
+	private langScope(common): void{
+		this.translation = {
+			noData: common.noData
+		}
+	}
+
+	ngOnInit(){
+		let translation = this.tlService.getTranslation(this.tlService.currentLang);
+		translation.subscribe(data => {
+			this.langScope(data.common);
+		});
+	}
+}

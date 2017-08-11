@@ -1,0 +1,29 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-title>{{translation?.about}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-list-header text-center class="mt25 pb25">
+	    	<img [src]="icons.logo" width="109"/>
+	    </ion-list-header>
+	    <ion-item class="pl10 pr10">
+		  <ion-row>
+		    <ion-col col-6>{{translation?.company}}:</ion-col>
+		    <ion-col col-6>{{data?.company}}</ion-col>
+		  </ion-row> 
+		</ion-item>
+		<ion-item class="pl10 pr10">
+		  <ion-row>
+		    <ion-col col-6>{{translation?.version}}:</ion-col>
+		    <ion-col col-6>{{data?.version}}</ion-col>
+		  </ion-row>
+		</ion-item>
+	</ion-list>
+</ion-content>
+
+<ion-footer text-center>
+	<p>2017 RIB Software SE info@rib-software.com</p>
+</ion-footer>

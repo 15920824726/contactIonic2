@@ -1,0 +1,25 @@
+<ion-header *ngIf="status">
+  <ion-navbar color="primary"></ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-list-header text-center no-lines class="mt25 pb25">
+      <img [src]="icons.logo" width="109" />
+    </ion-list-header>
+    <ion-card class="pb10" no-lines>
+      <ion-list no-lines>      
+        <ion-item>
+          <ion-label stacked>{{translation.appServer}}</ion-label>
+          <ion-input class="bg-white pl10" [(ngModel)]="server.appServer"></ion-input>
+        </ion-item>
+        <ion-item no-lines>
+          <ion-label stacked>{{translation.identityServer}}</ion-label>
+          <ion-input class="bg-white pl10" [(ngModel)]="server.identityServer"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    <ion-item no-lines>
+      <button ion-button block default (click)="gotoLogin()">{{translation.apply}}</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

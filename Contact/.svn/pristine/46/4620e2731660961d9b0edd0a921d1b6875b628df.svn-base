@@ -1,0 +1,79 @@
+<ion-header>
+	<ion-navbar color="primary" hideBackButton="true">
+    <ion-icon color="light" name="arrow-back" (click)="gotoContactList()" class="pa ml5"></ion-icon>
+		<contact-header></contact-header>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<ion-list>
+		<ion-list-header class="pr15">
+			<ion-avatar item-start *ngIf="data?.photo">
+				<img-data [dataUrl]="data?.photo.photo"></img-data>
+			</ion-avatar>
+			<h2>{{contactName}}</h2>
+			<p>{{data?.basicInfo?.contactRoleDescription}}</p>
+			<p>{{data?.bpname}}</p>
+			<p>{{data?.basicInfo?.subsidiaryDescription}}</p>
+
+			<h2>{{data?.basicInfo?.businessPartnerName1}}</h2>
+			<p>{{data?.basicInfo?.mainSubsidiaryDescription}}</p>
+		</ion-list-header>
+		<ion-item *ngIf="data?.telephone?.telephone">
+			<ion-icon class="contact-icon-telephone" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.telephone}}</h2>
+      <a class="text-blue" href="tel:{{data?.telephone?.telephone}}">{{data?.telephone?.telephone}}</a>
+		</ion-item>
+
+		<ion-item *ngIf="data?.telephone2?.telephone">
+			<ion-icon class="contact-icon-telephone" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.telephone}}</h2>
+			<a class="text-blue" href="tel:{{data?.telephone2?.telephone}}">{{data?.telephone2?.telephone}}</a>
+		</ion-item>
+		<ion-item *ngIf="data?.mobile?.phoneNumber">
+			<ion-icon class="contact-icon-mobile" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.mobile}}</h2>
+			<a class="text-blue" href="tel:{{data?.mobile?.phoneNumber}}">{{data?.mobile?.phoneNumber}}</a>
+		</ion-item>
+		<ion-item *ngIf="data?.mobile?.phoneNumber">
+			<ion-icon class="contact-icon-message" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.message}}</h2>
+			<p class="text-blue" (click)="message(data.mobile.phoneNumber)">{{data?.mobile?.phoneNumber}}</p>
+		</ion-item>
+		<ion-item *ngIf="data?.teleFax?.phoneNumber">
+			<ion-icon class="contact-icon-fax" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.fax}}</h2>
+			<p class="text-blue">{{data?.teleFax?.phoneNumber}}</p>
+		</ion-item>
+		<ion-item *ngIf="data?.basicInfo?.internet">
+			<ion-icon class="contact-icon-web" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.website}}</h2>
+			<a class="text-blue" href="{{'http://www.'+data?.basicInfo?.internet.split('www.')[1]}}">{{data?.basicInfo?.internet}}</a>
+		</ion-item>
+
+		<ion-item *ngIf="data?.basicInfo?.email" (click)="email(data.basicInfo.email)">
+			<ion-icon class="contact-icon-email" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.email}}</h2>
+			<p class="text-blue">
+				{{data?.basicInfo?.email}}
+			</p>
+		</ion-item>
+
+		<ion-item *ngIf="data?.address?.addressLine" (click)="gotoMap(data.address)">
+			<ion-icon class="contact-icon-address" item-start isActive="false"></ion-icon>
+			<h2>{{translation?.address}}</h2>
+			<p class="text-blue">{{data?.address?.addressLine}}</p>
+		</ion-item>
+
+		<ion-item text-center *ngIf="showBtn">
+			<button ion-button clear icon-only class="pr15" (click)="favorite(data)">
+				<ion-icon name="heart" isActive="{{!!favoriteId}}" class="text-blue"></ion-icon>
+			</button>
+			<button ion-button clear icon-only class="pl15" (click)="gotoEdit()">
+				<ion-icon name="create" isActive="false" class="text-blue"></ion-icon>
+			</button>
+		</ion-item>
+	</ion-list>
+</ion-content>
+<ion-footer>
+	<itwo-footer></itwo-footer>
+</ion-footer>

@@ -1,0 +1,389 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+/*
+* style padding
+*/
+
+@for $i from 0 through 4 {
+  @for $j from 0 through 5 {
+    @if $i == 0 {
+      .p#{$j*5} {
+        padding:$j*5px!important;
+      }
+    }
+    @else{
+      .p#{nth($posn-ab,$i)}#{$j*5} {
+        padding-#{nth($posn-lst,$i)}: $j*5px!important;
+      }
+    }
+  }
+}
+
+@for $i from 0 through 4 {
+  @for $j from 0 through 5 {
+    @if $i == 0 {
+      .m#{$j*5} {
+        margin:$j*5px!important;
+      }
+    }
+    @else{
+      .m#{nth($posn-ab,$i)}#{$j*5} {
+        margin-#{nth($posn-lst,$i)}: $j*5px!important;
+      }
+    }
+  }
+}
+
+/*
+ * style of border
+ */
+ @for $i from 1 through 4{
+ 	.b#{nth($posn-ab,$i)}{
+ 		border-#{nth($posn-lst,$i)}: 0.55px solid #c8c7cc!important;
+ 	}
+ }
+
+.platform-android {
+  .header-ios .toolbar-ios:last-child {
+    .toolbar-background-ios {
+      border-bottom-width: 1px;
+    }
+  }
+  .list-ios > .item-block:first-child,
+  .list-ios > .item-block:last-child,
+  .item-ios.item-block .item-inner,
+  .list-header-ios {
+    border-width: 1px;
+  }
+  @for $i from 1 through 4 {
+    .b#{nth($posn-ab,$i)} {
+      border-width: 1px;
+    }
+  }
+}
+/*
+ * style of position
+ */
+.pa {
+  position: absolute!important;
+}
+.ps {
+  position: static!important;
+}
+.pr {
+  position: relative!important;
+}
+
+.ib {
+  display: inline-block;
+}
+/*
+ * style of float
+ */
+.fl {
+  float: left!important;
+}
+.fr {
+  float: right!important;
+}
+
+/*
+ * style of absolute position
+ */
+.al {
+  position: absolute;
+  left: 0;
+}
+.ar {
+  position: absolute;
+  right: 0;
+}
+.bg-white {
+  background-color: color($colors, white);
+}
+.text-blue {
+  color: color($colors, blue)!important;
+}
+
+ion-icon {
+  position: relative;
+  pointer-events: auto;
+  ion-icon {
+    position: absolute;
+    right: -8px;
+    bottom: -2px;
+    font-size: .6em;
+  }
+}
+ion-footer {
+  box-shadow: 1px -5px 15px #c0d3e4;
+  background: color($colors,white);
+}
+ion-navbar {
+  ion-icon{
+    font-size: 3.0rem!important;
+  }
+}
+.note-ios { color: color($colors,black); }
+.active {
+  color: color($colors,primary);
+}
+.feedback {
+  margin: 0;
+  text-align: center;
+  color: color($colors,danger);
+}
+.bold {
+    font-weight: bold!important;
+}
+.red {
+  color: color($colors,danger)!important;
+}
+
+.no-data {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  color:#C2C1C1;
+}
+.no-data-img{
+  width:6rem;
+  height:6rem;
+}
+.no-data-map{
+  width:4.2rem;
+  height:5.3rem;
+}
+contacts {
+  ion-item{
+    ion-icon,
+    p {
+      color: color($colors,gray)!important;
+    }
+  }
+}
+
+detail,
+project_detail {
+  ion-item {
+    a,p {
+      font-size: 1.7rem!important;
+      text-decoration: none;
+    }
+  }
+}
+
+itwo-footer {
+  ion-col {
+    .text {
+      white-space: nowrap;
+      word-break: keep-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+/*
+ * reset
+ */
+
+.ios {
+  ion-nav > .ion-page > ion-header > .toolbar.statusbar-padding:first-child {
+    div.toolbar-title.toolbar-title-ios {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+}
+.item-label-stacked {
+  ion-label {
+    color: color($colors,black);
+    font-size: 1.4rem!important;
+    .icon {
+      color: color($colors,black);
+    }
+  }
+}
+.success, .warning, .error {
+  .toast-wrapper {
+    padding-left: 35px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+  }
+}
+
+.success {
+  .toast-wrapper {
+    background-color: color($colors, blue);
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==") !important;
+  }
+}
+
+.warning {
+  .toast-wrapper {
+    background-color: color($colors, warn);
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=") !important;
+  }
+}
+
+.error {
+  .toast-wrapper {
+    background-color: color($colors, danger);
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHOSURBVEhLrZa/SgNBEMZzh0WKCClSCKaIYOED+AAKeQQLG8HWztLCImBrYadgIdY+gIKNYkBFSwu7CAoqCgkkoGBI/E28PdbLZmeDLgzZzcx83/zZ2SSXC1j9fr+I1Hq93g2yxH4iwM1vkoBWAdxCmpzTxfkN2RcyZNaHFIkSo10+8kgxkXIURV5HGxTmFuc75B2RfQkpxHG8aAgaAFa0tAHqYFfQ7Iwe2yhODk8+J4C7yAoRTWI3w/4klGRgR4lO7Rpn9+gvMyWp+uxFh8+H+ARlgN1nJuJuQAYvNkEnwGFck18Er4q3egEc/oO+mhLdKgRyhdNFiacC0rlOCbhNVz4H9FnAYgDBvU3QIioZlJFLJtsoHYRDfiZoUyIxqCtRpVlANq0EU4dApjrtgezPFad5S19Wgjkc0hNVnuF4HjVA6C7QrSIbylB+oZe3aHgBsqlNqKYH48jXyJKMuAbiyVJ8KzaB3eRc0pg9VwQ4niFryI68qiOi3AbjwdsfnAtk0bCjTLJKr6mrD9g8iq/S/B81hguOMlQTnVyG40wAcjnmgsCNESDrjme7wfftP4P7SP4N3CJZdvzoNyGq2c/HWOXJGsvVg+RA/k2MC/wN6I2YA2Pt8GkAAAAASUVORK5CYII=") !important;
+  }
+
+  &.item {
+    color: color($colors, danger);
+  }
+}
+
+
+@font-face {
+  font-family: 'contact';
+  src:  url('../assets/fonts/contact.eot?yf1gy7');
+  src:  url('../assets/fonts/contact.eot?yf1gy7#iefix') format('embedded-opentype'),
+    url('../assets/fonts/contact.ttf?yf1gy7') format('truetype'),
+    url('../assets/fonts/contact.woff?yf1gy7') format('woff'),
+    url('../assets/fonts/contact.svg?yf1gy7#contact') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="contact-icon-"], [class*=" contact-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'contact' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 1.8rem!important;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.contact-icon-address:before {
+  content: "\e901";
+}
+.contact-icon-back:before {
+  content: "\e902";
+}
+.contact-icon-bp:before {
+  content: "\e903";
+}
+.contact-icon-businesspatner:before {
+  content: "\e904";
+}
+.contact-icon-company1:before {
+  content: "\e905";
+}
+.contact-icon-contact:before {
+  content: "\e906";
+}
+.contact-icon-delete:before {
+  content: "\e907";
+}
+.contact-icon-edit:before {
+  content: "\e908";
+}
+.contact-icon-email:before {
+  content: "\e909";
+}
+.contact-icon-favorite:before {
+  content: "\e90a";
+}
+.contact-icon-fax:before {
+  content: "\e90b";
+}
+.contact-icon-group:before {
+  content: "\e90c";
+}
+.contact-icon-info:before {
+  content: "\e90d";
+}
+.contact-icon-language:before {
+  content: "\e91b";
+}
+.contact-icon-map:before {
+  content: "\e90e";
+}
+.contact-icon-message:before {
+  content: "\e90f";
+}
+.contact-icon-mobile:before {
+  content: "\e910";
+}
+.contact-icon-name2:before {
+  content: "\e911";
+}
+.contact-icon-password:before {
+  content: "\e912";
+}
+.contact-icon-Profitcenter:before {
+  content: "\e913";
+}
+.contact-icon-project:before {
+  content: "\e914";
+}
+.contact-icon-selectcompany:before {
+  content: "\e915";
+}
+.contact-icon-selectrole:before {
+  content: "\e916";
+}
+.contact-icon-serch:before {
+  content: "\e917";
+}
+.contact-icon-server:before {
+  content: "\e918";
+}
+.contact-icon-seting:before {
+  content: "\e919";
+}
+.contact-icon-telephone:before {
+  content: "\e91a";
+}
+.contact-icon-usename:before {
+  content: "\e91d";
+}
+.contact-icon-web:before {
+  content: "\e91c";
+}
+.contact-icon-company:before {
+  content: "\e900";
+}
+
+/*custom style*/
+.add-label-style{
+  font-size: 1.7rem !important;
+  color:#000 !important;
+}
+.add-label-style-active{
+  font-size: 1.7rem !important;
+  color:#999 !important;
+}
+
+.item-label-stacked ion-label{
+  font-size: 1.7rem !important;
+}
+
+
